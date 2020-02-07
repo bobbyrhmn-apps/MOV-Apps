@@ -1,11 +1,13 @@
 package com.bobbyrhmn.movapps.home
 
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 
 import com.bobbyrhmn.movapps.R
 import com.bobbyrhmn.movapps.utils.Preferences
@@ -40,6 +42,7 @@ class SettingFragment : Fragment() {
             .load(preferences.getValues("url"))
             .apply(RequestOptions.circleCropTransform())
             .into(iv_profile)
+
     }
 
 }
