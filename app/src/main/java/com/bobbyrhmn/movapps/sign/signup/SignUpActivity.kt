@@ -53,8 +53,15 @@ class SignUpActivity : AppCompatActivity() {
                 et_email.requestFocus()
             } else {
 
-                saveUser(sUsername, sPassword, sNama, sEmail)
+                var statusUsername = sUsername.indexOf(".")
+                if (statusUsername >= 0) {
+                    et_username.error = "Silahkan Tulis Username Anda Tanpa ."
+                    et_username.requestFocus()
+                } else {
 
+                    saveUser(sUsername, sPassword, sNama, sEmail)
+
+                }
             }
         }
     }

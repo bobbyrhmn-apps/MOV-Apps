@@ -10,6 +10,10 @@ import com.bobbyrhmn.movapps.sign.signup.SignUpActivity
 import com.bobbyrhmn.movapps.utils.Preferences
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_sign_in.*
+import kotlinx.android.synthetic.main.activity_sign_in.btn_home
+import kotlinx.android.synthetic.main.activity_sign_in.et_password
+import kotlinx.android.synthetic.main.activity_sign_in.et_username
+import kotlinx.android.synthetic.main.activity_sign_up.*
 
 
 class SignInActivity : AppCompatActivity() {
@@ -47,6 +51,11 @@ class SignInActivity : AppCompatActivity() {
                 et_password.error = "Silahkan Masukan Password Anda"
                 et_password.requestFocus()
             } else {
+                var statusUsername = iUsername.indexOf(".")
+                if (statusUsername >= 0) {
+                    et_username.error = "Silahkan Tulis Username Anda Tanpa ."
+                    et_username.requestFocus()
+                } else
                 pushLogin(iUsername, iPassword)
             }
         }
