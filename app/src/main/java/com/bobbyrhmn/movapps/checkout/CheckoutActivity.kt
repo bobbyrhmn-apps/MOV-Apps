@@ -81,7 +81,7 @@ class CheckoutActivity : AppCompatActivity() {
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            val channelName = "BWAMOV Notif Channel"
+            val channelName = "MOV Apps Notif Channel"
             val importance = NotificationManager.IMPORTANCE_HIGH
 
             val mChannel= NotificationChannel(NOTIFICATION_CHANNEL_ID,channelName,importance)
