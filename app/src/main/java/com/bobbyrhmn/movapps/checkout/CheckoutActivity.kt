@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bobbyrhmn.movapps.R
 import com.bobbyrhmn.movapps.checkout.adapter.CheckoutAdapter
 import com.bobbyrhmn.movapps.checkout.model.Checkout
+import com.bobbyrhmn.movapps.home.TiketActivity
+import com.bobbyrhmn.movapps.home.model.Film
 import com.bobbyrhmn.movapps.utils.Preferences
 import kotlinx.android.synthetic.main.activity_checkout.*
 import java.text.NumberFormat
@@ -35,6 +37,7 @@ class CheckoutActivity : AppCompatActivity() {
 
         preferences = Preferences(this)
         dataList = intent.getSerializableExtra("data") as ArrayList<Checkout>
+        val data = intent.getParcelableExtra<Film>("datas")
 
 
         for (a in dataList.indices) {
@@ -50,7 +53,7 @@ class CheckoutActivity : AppCompatActivity() {
             )
             startActivity(intent)
 
-            showNotif()
+            showNotif(data)
         }
         btn_home.setOnClickListener {
             finish()
@@ -74,7 +77,7 @@ class CheckoutActivity : AppCompatActivity() {
         }
     }
 
-    private fun showNotif() {
+    private fun showNotif(datas: Film) {
         val NOTIFICATION_CHANNEL_ID = "channel_bwa_notif"
         val context = this.applicationContext
         var notificationManager =
@@ -88,9 +91,14 @@ class CheckoutActivity : AppCompatActivity() {
             notificationManager.createNotificationChannel(mChannel)
         }
 
-        val mIntent = Intent (this, CheckoutSuccessActivity::class.java)
+//        val mIntent = Intent (this, CheckoutSuccessActivity::class.java)
+//        val bundle = Bundle()
+//        bundle.putString("id", "id_film")
+//        mIntent.putExtras(bundle)
+
+        val mIntent = Intent (this, TiketActivity::class.java)
         val bundle = Bundle()
-        bundle.putString("id", "id_film")
+        bundle.putParcelable("data", datas)
         mIntent.putExtras(bundle)
 
         val pendingIntent =
@@ -111,7 +119,7 @@ class CheckoutActivity : AppCompatActivity() {
             .setLights(Color.RED, 3000, 3000)
             .setDefaults(Notification.DEFAULT_SOUND)
             .setContentTitle("Pembayaran Berhasil")
-            .setContentText("MOV APPS")
+            .setContentText("Tiket" +datas.judul+ "berhasil terbeli. Enjoy the movue!")
 
         notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.notify(115, builder.build())
